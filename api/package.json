@@ -1,0 +1,48 @@
+{
+  "name": "sil-fit-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "apidoc": "apidoc -i routes/ -o doc/views/ -t doc/template/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "apidoc": {
+    "name": "APIrate",
+    "version": "0.1.0",
+    "description": "Template for Rest api creation",
+    "title": "Custom apiDoc browser title",
+    "url" : "https://localhost",
+    "header": {
+      "title": "Documentation"
+    },
+    "footer": {
+      "title": "coded w/ ❤️"
+    },
+    "order" : [
+      "GetAll",
+      "GetById",
+      "Create",
+      "UpdateById",
+      "DeleteById",
+      "Register",
+      "Authenticate"
+    ]
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.3",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.7",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-linkedin-oauth2": "^1.6.1"
+  }
+}

@@ -1,0 +1,6 @@
+node_modules
+.env
+.conf.json
+.env.json
+.DS_Store
+.idea/
