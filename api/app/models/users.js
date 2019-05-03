@@ -59,33 +59,33 @@ UserSchema.pre('save', function(next) {
 
 const User = mongoose.model('User', UserSchema);
 
-console.log('Try to generate admin user ...');
-User.findOne({
-  email: 'admin@silicom.fr'
-}, function(err, userInfo) {
-  if (err) {
-    console.log('an error has occured')
-  } else {
-    if(userInfo === null) {
-      console.log('Create user');
-      User.create({
-        firstname: 'silicom',
-        lastname: 'admin',
-        email: 'admin@silicom.fr',
-        password: 'admin',
-        role: 'admin',
-        linkedinProfile: '{}'
-      }, function(err, result) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("User generated successfully!!!")
-        }
-      });
-    }else{
-      console.log('User already exist');
-    }
-  }
-});
+// console.log('Try to generate admin user ...');
+// User.findOne({
+//   email: 'admin@silicom.fr'
+// }, function(err, userInfo) {
+//   if (err) {
+//     console.log('an error has occured')
+//   } else {
+//     if(userInfo === null) {
+//       console.log('Create user');
+//       User.create({
+//         firstname: 'silicom',
+//         lastname: 'admin',
+//         email: 'admin@silicom.fr',
+//         password: 'admin',
+//         role: 'admin',
+//         linkedinProfile: '{}'
+//       }, function(err, result) {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           console.log("User generated successfully!!!")
+//         }
+//       });
+//     }else{
+//       console.log('User already exist');
+//     }
+//   }
+// });
 
 module.exports = User;

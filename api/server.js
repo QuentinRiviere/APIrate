@@ -10,6 +10,7 @@ const fs = require('fs'); // Required for https
 const https = require('https'); // Required for https
 const http = require('http');
 
+process.env.BASE_PATH = __dirname;
 
 /*
  *

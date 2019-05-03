@@ -22,6 +22,16 @@ const PostSchema = new Schema({
     trim: true,
     required: true
   },
+  categories: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Blog_Post_Category',
+    required: false
+  }],
+  tags: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Blog_Post_Tag',
+    required: false
+  }],
   createdAt: {
     type: Date,
     trim: true,
@@ -30,7 +40,7 @@ const PostSchema = new Schema({
   updatedAt: {
     type: Date,
     trim: true,
-    required : true
+    required: true
   },
   deletedAt: {
     type: Date,
@@ -38,6 +48,6 @@ const PostSchema = new Schema({
     required: false
   }
 });
-const Post = mongoose.model('Post', PostSchema);
+const Post = mongoose.model('Blog_Post', PostSchema);
 
 module.exports = Post;

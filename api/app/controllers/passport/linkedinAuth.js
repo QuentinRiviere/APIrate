@@ -5,8 +5,8 @@ const port = `${process.env.SERVER_PORT ? (parseInt(process.env.SERVER_PORT) !==
 const address = `${process.env.SERVER_ADDRESS ? process.env.SERVER_ADDRESS : 'localhost'}`;
 
 passport.use(new LinkedInStrategy({
-  clientID: process.env.LINKEDIN_KEY,
-  clientSecret: process.env.LINKEDIN_SECRET,
+  clientID: process.env.LINKEDIN_KEY ? process.env.LINKEDIN_KEY : "clientID",
+  clientSecret: process.env.LINKEDIN_SECRET ? process.env.LINKEDIN_SECRET : "clientKey",
   callbackURL: `http://${address}${port}/auth/linkedin/callback`,
   scope: ['r_emailaddress', 'r_basicprofile'],
   state: true

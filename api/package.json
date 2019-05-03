@@ -15,14 +15,14 @@
     "version": "0.1.0",
     "description": "Template for Rest api creation",
     "title": "Custom apiDoc browser title",
-    "url" : "https://localhost",
+    "url": "https://localhost",
     "header": {
       "title": "Documentation"
     },
     "footer": {
       "title": "coded w/ ❤️"
     },
-    "order" : [
+    "order": [
       "GetAll",
       "GetById",
       "Create",

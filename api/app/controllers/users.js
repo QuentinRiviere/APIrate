@@ -6,7 +6,6 @@ module.exports = {
   profile: function(req, res, next) {
     console.log(req.body.userId);
     userModel.findById(req.body.userId, function(err, userInfo) {
-
       if (err) {
         next(err);
       } else {
@@ -30,7 +29,6 @@ module.exports = {
         }
       }
     });
-
   },
   updateLinkedinProfile: function(req, res, next) {
     console.log(req.body.userId);

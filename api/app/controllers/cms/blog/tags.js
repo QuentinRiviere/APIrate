@@ -1,86 +1,85 @@
-const movieModel = require('../models/movies');
+const tagModel = require(process.env.BASE_PATH + '/app/models/blog/tags');
 module.exports = {
   getById: function(req, res, next) {
     console.log(req.body);
-    movieModel.findById(req.params.movieId, function(err, movieInfo) {
+    tagModel.findById(req.params.tagId, function(err, tag) {
       if (err) {
         next(err);
       } else {
         res.json({
           status: "success",
-          message: "Movie found!!!",
+          message: "tag found!!!",
           data: {
-            movies: movieInfo
+            tag: tag
           }
         });
       }
     });
   },
   getAll: function(req, res, next) {
-    let moviesList = [];
-    movieModel.find({}, function(err, movies) {
+    let tagsList = [];
+    tagModel.find({}, function(err, tags) {
       if (err) {
         next(err);
       } else {
-        for (let movie of movies) {
-          moviesList.push({
-            id: movie._id,
-            name: movie.name,
-            released_on: movie.released_on
+        for (let tag of tags) {
+          tagsList.push({
+            id: tag._id,
+            name: tag.name
           });
         }
         res.json({
           status: "success",
-          message: "Movies list found!!!",
+          message: "tags list found!!!",
           data: {
-            movies: moviesList
+            tags: tagsList
           }
         });
       }
     });
   },
   updateById: function(req, res, next) {
-    movieModel.findByIdAndUpdate(req.params.movieId, {
-      name: req.body.name
-    }, function(err, movieInfo) {
+    tagModel.findByIdAndUpdate(req.params.tagId, {
+      name: req.body.tags
+    }, function(err, tagInfo) {
       if (err)
         next(err);
       else {
         res.json({
           status: "success",
-          message: "Movie updated successfully!!!",
+          message: "tag updated successfully!!!",
           data: null
         });
       }
     });
   },
   deleteById: function(req, res, next) {
-    movieModel.findByIdAndRemove(req.params.movieId, function(err, movieInfo) {
+    tagModel.findByIdAndRemove(req.params.tagId, function(err, tagInfo) {
       if (err)
         next(err);
       else {
         res.json({
           status: "success",
-          message: "Movie deleted successfully!!!",
+          message: "tag deleted successfully!!!",
           data: null
         });
       }
     });
   },
   create: function(req, res, next) {
-    movieModel.create({
-      name: req.body.name,
-      released_on: req.body.released_on
+    console.log(req.body.userId);
+    tagModel.create({
+      name: req.body.tags,
     }, function(err, result) {
       if (err)
         next(err);
       else
         res.json({
           status: "success",
-          message: "Movie added successfully!!!",
+          message: "tag added successfully!!!",
           data: null
         });
 
     });
-  },
-}
+  }
+};

@@ -13,10 +13,14 @@ const validateUser = require('../middleware/validate_user');
 
 // routes imports
 const auth = require('./auth/auth');
+const linkedin = require('./auth/linkedin');
 const users = require('./public/users');
 const protectedUsers = require('./protected/users');
-const posts = require('./public/posts');
-const protectedPosts = require('./protected/posts');
+const posts = require('./public/cms/blog/posts');
+const protectedPosts = require('./protected/cms/blog/posts');
+const categories = require('./public/cms/blog/categories');
+const tags = require('./public/cms/blog/tags');
+
 
 app.set('secretKey', process.env.JWT_SECRETKEY ? process.env.JWT_SECRETKEY : Math.random().toString(36).substring(20)); // jwt secret token
 
@@ -95,6 +99,8 @@ app.get('/', function(req, res) {
  */
 app.use(api + '/users', users);
 app.use(api + '/posts', posts);
+app.use(api + '/categories', categories);
+app.use(api + '/tags', tags);
 
 /*
  *
@@ -102,6 +108,7 @@ app.use(api + '/posts', posts);
  *
  */
 app.use(api + '/auth', auth);
+app.use(api + '/auth', linkedin);
 
 /*
  *
