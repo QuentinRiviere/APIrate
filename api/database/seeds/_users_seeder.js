@@ -1,4 +1,4 @@
-const User = require('../../app/models/users');
+const User = require(NAMESPACES.model.User);
 
 let users_seeder = () => {
   return new Promise((resolv, reject) => {

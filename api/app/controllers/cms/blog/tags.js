@@ -1,16 +1,21 @@
-const tagModel = require(process.env.BASE_PATH + '/app/models/blog/tags');
+const tagModel = require(NAMESPACES.model.BlogTag);
 module.exports = {
   getById: function(req, res, next) {
     console.log(req.body);
+    let locale = req.param('locale') && CONFIG.locales.includes(req.param('locale')) ? req.param('locale') : CONFIG.default_locale;
     tagModel.findById(req.params.tagId, function(err, tag) {
       if (err) {
         next(err);
       } else {
+        tag.setLanguage(locale);
         res.json({
           status: "success",
           message: "tag found!!!",
           data: {
-            tag: tag
+            tag: {
+              id: tag._id,
+              name: tag.name
+            }
           }
         });
       }
@@ -18,11 +23,13 @@ module.exports = {
   },
   getAll: function(req, res, next) {
     let tagsList = [];
+    let locale = req.param('locale') && CONFIG.locales.includes(req.param('locale')) ? req.param('locale') : CONFIG.default_locale;
     tagModel.find({}, function(err, tags) {
       if (err) {
         next(err);
       } else {
         for (let tag of tags) {
+          tag.setLanguage(locale);
           tagsList.push({
             id: tag._id,
             name: tag.name

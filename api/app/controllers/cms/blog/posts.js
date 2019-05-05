@@ -1,25 +1,50 @@
-const postModel = require(process.env.BASE_PATH + '/app/models/blog/posts');
+const postModel = require(NAMESPACES.model.BlogPost);
+const categoryModel = require(NAMESPACES.model.BlogCategory);
+const tagModel = require(NAMESPACES.model.BlogTag);
 module.exports = {
   getById: function(req, res, next) {
     console.log(req.body);
+    let locale = req.param('locale') && CONFIG.locales.includes(req.param('locale')) ? req.param('locale') : CONFIG.default_locale;
     postModel.findById(req.params.postId, function(err, post) {
       if (err) {
         next(err);
       } else {
-        res.json({
-          status: "success",
-          message: "post found!!!",
-          data: {
-            post: post
-          }
+        toLocaleDocument({
+          document: post,
+          locale: locale,
+          populate: ['categories', 'tags'],
+          fields: [
+            'id',
+            'title',
+            'subTitle',
+            'userId',
+            'content',
+            'categories',
+            'tags',
+            'createdAt',
+            'updatedAt',
+            'deletedAt'
+          ]
+        }).then(result => {
+          res.json({
+            status: 'success',
+            message: 'post found!!!',
+            data: {
+              post: result
+            }
+          });
+        }).catch(err => {
+          next(err);
         });
       }
     }).populate('categories').populate('tags');
   },
   getAll: function(req, res, next) {
     let postsList = [];
+    let locale = req.param('locale') && CONFIG.locales.includes(req.param('locale')) ? req.param('locale') : CONFIG.default_locale;
     let perPage = req.param('perPage') ? parseInt(req.param('perPage')) : parseInt(postModel.count()),
       page = Math.max(0, req.param('page'));
+    
     postModel.find({})
       .populate('categories')
       .populate('tags')
@@ -30,45 +55,54 @@ module.exports = {
           next(err);
         } else {
           postModel.countDocuments().exec(function(err, count) {
-            for (let post of posts) {
-              postsList.push({
-                id: post._id,
-                title: post.title,
-                subTitle: post.subTitle,
-                userId: post.userId,
-                content: post.content,
-                categories: post.categories ? post.categories : null,
-                tags: post.tags ? post.tags : null,
-                createdAt: post.createdAt,
-                updatedAt: post.updatedAt,
-                deletedAt: post.deletedAt
+            // Global function toLocaleDocument (location : api/core/functions/documents.js)
+            toLocaleDocument({
+              collection: posts,
+              locale: locale,
+              populate: ['categories', 'tags'],
+              fields: [
+                'id',
+                'title',
+                'subTitle',
+                'userId',
+                'content',
+                'slug',
+                'categories',
+                'tags',
+                'createdAt',
+                'updatedAt',
+                'deletedAt',
+              ],
+            }).then(result => {
+              res.json({
+                posts: result,
+                page: page,
+                pages: Math.floor(count / perPage),
               });
-            }
-            res.json({
-              posts: postsList,
-              page: page,
-              pages: Math.floor(count / perPage)
-            })
-          })
+            }).catch(err => {
+              next(err);
+            });
+          });
         }
       });
   },
   updateById: function(req, res, next) {
+    
     postModel.findByIdAndUpdate(req.params.postId, {
       title: req.body.title,
       subTitle: req.body.subTitle,
       content: req.body.content,
-      categories: req.body.categoryId,
+      categories: req.body.categories,
       tags: req.body.tagsId,
-      updatedAt: Date.now()
+      updatedAt: Date.now(),
     }, function(err, postInfo) {
       if (err)
         next(err);
       else {
         res.json({
-          status: "success",
-          message: "post updated successfully!!!",
-          data: null
+          status: 'success',
+          message: 'post updated successfully!!!',
+          data: null,
         });
       }
     });
@@ -79,35 +113,56 @@ module.exports = {
         next(err);
       else {
         res.json({
-          status: "success",
-          message: "post deleted successfully!!!",
-          data: null
+          status: 'success',
+          message: 'post deleted successfully!!!',
+          data: null,
         });
       }
     });
   },
   create: function(req, res, next) {
     console.log(req.body.userId);
+
+//    toLocaleRequest({
+//      model: "post",
+//      request: req.body,
+//      params: [
+//       "title",
+//       "subTitle",
+//       "userId",
+//       "content",
+//       "categories",
+//       "tags"
+//      ]
+//    }).then(result => {
+//      res.json(result);
+//      console.log(result);
+//    }).catch(err => {
+//      res.json(err);
+//      console.log(err);
+//    });
+    
     postModel.create({
       title: req.body.title,
       subTitle: req.body.subTitle,
       userId: req.body.userId,
       content: req.body.content,
-      categories: req.body.categoryId,
+      slug: req.body.slug,
+      categories: req.body.categories,
       tags: req.body.tags,
       createdAt: Date.now(),
       updatedAt: Date.now(),
-      deletedAt: null
+      deletedAt: null,
     }, function(err, result) {
       if (err)
         next(err);
       else
         res.json({
-          status: "success",
-          message: "post added successfully!!!",
-          data: null
+          status: 'success',
+          message: 'post added successfully!!!',
+          data: null,
         });
 
     });
-  }
+  },
 };

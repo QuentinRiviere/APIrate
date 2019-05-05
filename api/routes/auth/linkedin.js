@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const linkedin = require('../../app/controllers/passport/linkedinAuth');
+const linkedin = require(NAMESPACES.controller.PassportLinkedin);
 
 /**
  *

@@ -8,21 +8,20 @@ const session = require('express-session');
 const app = express();
 
 // middleware imports
-const validateAdmin = require('../middleware/validate_admin');
-const validateUser = require('../middleware/validate_user');
+const validateAdmin = require(NAMESPACES.middleware.ValidateAdmin);
+const validateUser = require(NAMESPACES.middleware.ValidateUser);
 
 // routes imports
-const auth = require('./auth/auth');
-const linkedin = require('./auth/linkedin');
-const users = require('./public/users');
-const protectedUsers = require('./protected/users');
-const posts = require('./public/cms/blog/posts');
-const protectedPosts = require('./protected/cms/blog/posts');
-const categories = require('./public/cms/blog/categories');
-const tags = require('./public/cms/blog/tags');
+const auth = require(NAMESPACES.routes.AuthBasic);
+const linkedin = require(NAMESPACES.routes.AuthLinkedin);
+const users = require(NAMESPACES.routes.Users);
+const protectedUsers = require(NAMESPACES.routes.ProtectedUsers);
+const posts = require(NAMESPACES.routes.BlogPosts);
+const protectedPosts = require(NAMESPACES.routes.ProtectedBlogPosts);
+const categories = require(NAMESPACES.routes.BlogCategories);
+const tags = require(NAMESPACES.routes.BlogTags);
 
-
-app.set('secretKey', process.env.JWT_SECRETKEY ? process.env.JWT_SECRETKEY : Math.random().toString(36).substring(20)); // jwt secret token
+app.set('secretKey', CONFIG.jwt_secret_key ? CONFIG.jwt_secret_key : Math.random().toString(36).substring(20)); // jwt secret token
 
 /*
  *
@@ -45,6 +44,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+
+
 
 /*
  *

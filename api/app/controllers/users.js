@@ -1,4 +1,4 @@
-const userModel = require('../models/users');
+const userModel = require(NAMESPACES.model.User);
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const linkedinAuth = require('./passport/linkedinAuth');

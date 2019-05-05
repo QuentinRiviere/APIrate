@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const tagController = require(process.env.BASE_PATH + '/app/controllers/cms/blog/tags');
+const tagController = require(NAMESPACES.controller.BlogTags);
 
 /**
  *
- * @api {get} /api/Tags GetAll
- * @apiName GetAll
+ * @api {get} /api/Tags GetAll (Blog tags)
+ * @apiName GetAll (Blog tags)
  * @apiGroup Blog Tags
  * @apiSampleRequest /api/tags
  * @apiDescription Get all Tags method
@@ -15,8 +15,8 @@ router.get('/', tagController.getAll);
 
 /**
  *
- * @api {get} /api/Tags/:tagId GetById
- * @apiName GetById
+ * @api {get} /api/Tags/:tagId GetById (Blog tags)
+ * @apiName GetById (Blog tags)
  * @apiGroup Blog Tags
  * @apiSampleRequest /api/tags/:tagId
  * @apiDescription Get a tag by Id method

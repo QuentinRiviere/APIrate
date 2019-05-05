@@ -1,4 +1,4 @@
-const userModel = require('../models/users');
+const userModel = require(NAMESPACES.model.User);
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -45,7 +45,7 @@ module.exports = {
             const token = jwt.sign({
               id: userInfo._id
             }, req.app.get('secretKey'), {
-              expiresIn: process.env.JWT_EXIRE ? process.env.JWT_EXIRE : '1h'
+              expiresIn: CONFIG.jwt_expire ? CONFIG.jwt_expire : '1h'
             });
 
             userInfo.password = null;

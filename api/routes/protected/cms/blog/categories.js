@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const categoryController = require(process.env.BASE_PATH + '/app/controllers/cms/blog/categories');
+const categoryController = require(NAMESPACES.controller.BlogCategories);
 
 /**
  *
- * @api {post} /api/protected/categories Create
- * @apiName Create
+ * @api {post} /api/protected/categories Create (Blog categories)
+ * @apiName Create (Blog categories)
  * @apiGroup Blog Categories
  * @apiHeader {String} x-access-token Users unique x-access-token.
  * @apiPermission Authenticated User
@@ -17,8 +17,8 @@ router.post('/', categoryController.create);
 
 /**
  *
- * @api {put} /api/protected/categories/:categoryId UpdateById
- * @apiName UpdateById
+ * @api {put} /api/protected/categories/:categoryId UpdateById (Blog categories)
+ * @apiName UpdateById (Blog categories)
  * @apiGroup Blog Categories
  * @apiHeader {String} x-access-token Users unique x-access-token.
  * @apiPermission Authenticated User
@@ -30,8 +30,8 @@ router.put('/:tagId', categoryController.updateById);
 
 /**
  *
- * @api {delete} /api/protected/categories/:categoryId DeleteById
- * @apiName DeleteById
+ * @api {delete} /api/protected/categories/:categoryId DeleteById (Blog categories)
+ * @apiName DeleteById (Blog categories)
  * @apiGroup Blog Categories
  * @apiPermission Authenticated User
  * @apiDescription Delete a category by Id method (as authenticated users)

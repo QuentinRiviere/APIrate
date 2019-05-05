@@ -3,25 +3,11 @@
  *  Config and Modules imports
  *
  */
-require('dotenv').config();
-const port = process.env.SERVER_PORT ? process.env.SERVER_PORT : 80;
-const mongoose = require('./config/database'); //database configuration
+require('./config/init');
+const port = CONFIG.server_port;
 const fs = require('fs'); // Required for https
 const https = require('https'); // Required for https
 const http = require('http');
-
-process.env.BASE_PATH = __dirname;
-
-/*
- *
- *  Mongodb connection
- *
- */
-mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
-mongoose.connection.on('open', function() {
-  console.log('Connected to mongoose');
-});
-
 
 /*
  *
@@ -30,7 +16,7 @@ mongoose.connection.on('open', function() {
  */
 const app = require('./routes/routes');
 
-
+console.log(SCHEMAINTL_MAPPING);
 
 /*
  *

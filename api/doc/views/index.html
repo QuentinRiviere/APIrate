@@ -9,6 +9,7 @@
   <link href="vendor/prettify.css" rel="stylesheet" media="screen">
   <link href="css/style.css" rel="stylesheet" media="screen, print">
   <link href="img/favicon.ico" rel="icon" type="image/x-icon">
+  <link href="css/fontawesome/css/all.css" rel="stylesheet" media="screen, print">
   <script src="vendor/polyfill.js"></script>
 </head>
 <body>
@@ -30,7 +31,7 @@
         {{/if}}
       {{else}}
         <li class="{{#if hidden}}hide {{/if}}" data-group="{{group}}" data-name="{{name}}" data-version="{{version}}">
-          <a href="#api-{{group}}-{{name}}" class="nav-list-item">{{title}} {{#if permission}} <small class="text-success">(Authenticated)</small>{{/if}}</a>
+          <a href="#api-{{group}}-{{name}}" class="nav-list-item">{{title}} {{#if permission}} <small class=""><i class="fas fa-user-lock"></i></small>{{/if}}</a>
         </li>
       {{/if}}
     {{/if}}
@@ -88,7 +89,7 @@
 
 <script id="template-sections" type="text/x-handlebars-template">
   <section id="api-{{group}}">
-    <h1>{{underscoreToSpace title}}</h1>
+    <h1 class="text-info">{{underscoreToSpace title}}</h1>
     {{#if description}}
       <p>{{{nl2br description}}}</p>
     {{/if}}

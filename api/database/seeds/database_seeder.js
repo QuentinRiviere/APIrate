@@ -1,10 +1,5 @@
-const mongoose = require('../../config/database'); //database configuration
-mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
-mongoose.connection.on('open', function() {
-  console.log('Connected to mongoose');
-});
-
-
+require('dotenv').config();
+const mongoose = require('../../config/init'); //database configuration
 /*
  *
  *  Imports seeders

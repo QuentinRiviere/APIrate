@@ -1,4 +1,4 @@
-const Tag = require('../../app/models/blog/tags');
+const Tag = require(NAMESPACES.model.BlogTag);
 
 let fakeTags = [];
 for (let i = 0; i < 5; i++) {
@@ -16,20 +16,26 @@ let Tags_seeder = () => {
     fakeTags.forEach((tag, i) => {
       console.log(`Create Tag ${tag} in database`);
       console.log(Tag.name);
-      Tag.create({
-        name: tag.name
-      }, function(err, res) {
-        if (err) {
-          console.log(err)
-          reject();
-        } else {
-          fakeTagIds.push(res._id);
-          console.log(`Tag ${i} added successfully!!!`)
-          if(i === fakeTags.length - 1){
-            resolv(fakeTagIds);
-          }
+  
+      let newTag = new Tag({
+        name: {
+          'fr': tag.name,
+          'en': 'english_ ' + tag.name
         }
       });
+  
+      newTag.save(function(err) {
+        if (err) {
+          console.log(err);
+          reject();
+        }
+        fakeTagIds.push(newTag._id);
+        console.log(`tag ${i} added successfully!!!`)
+        if(i === fakeTags.length - 1){
+          resolv(fakeTagIds);
+        }
+      });
+      
     });
 
   })
