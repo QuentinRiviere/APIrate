@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-//const intl = require(NAMESPACES.helpers.Intl);
 
 //Define a schema
 const Schema = mongoose.Schema;
