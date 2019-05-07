@@ -3,6 +3,52 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const linkedinAuth = require('./passport/linkedinAuth');
 module.exports = {
+  getAll: function(req, res, next) {
+    let usersList = [];
+    let locale = req.param('locale') && CONFIG.locales.includes(req.param('locale')) ? req.param('locale') : CONFIG.default_locale;
+    let perPage = req.param('perPage') ? parseInt(req.param('perPage')) : parseInt(userModel.estimatedDocumentCount()),
+      page = Math.max(0, req.param('page'));
+
+    userModel.estimatedDocumentCount().exec(function(err, count) {
+      let paginate = safePaginate({
+        perPage: perPage,
+        page: page,
+        count: count
+      })
+
+      userModel.find({})
+        .skip((paginate.perPage * paginate.page))
+        .limit(paginate.perPage)
+        .exec(function(err, users) {
+          if (err) {
+            next(err);
+          } else {
+            // Global function toLocaleDocument (location : api/core/functions/documents.js)
+            toLocaleDocument({
+              collection: users,
+              locale: locale,
+              populate: [],
+              fields: [
+                'id',
+                'firstname',
+                'lastname',
+                'email',
+                'createdAt',
+                'updatedAt'
+              ],
+            }).then(result => {
+              res.json({
+                users: result,
+                page: paginate.page + 1,
+                pages: Math.floor(count / paginate.perPage),
+              });
+            }).catch(err => {
+              next(err);
+            });
+          }
+        });
+    });
+  },
   profile: function(req, res, next) {
     console.log(req.body.userId);
     userModel.findById(req.body.userId, function(err, userInfo) {

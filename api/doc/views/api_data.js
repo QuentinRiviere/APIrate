@@ -654,5 +654,59 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "routes/auth/linkedin.js",
     "groupTitle": "Linkedin_OAuth2"
+  },
+  {
+    "type": "get",
+    "url": "/api/protected/users/all",
+    "title": "getAll (Users)",
+    "name": "getAll__Blog_categories_",
+    "group": "Users",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-access-token",
+            "description": "<p>Users unique x-access-token.</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "Admin"
+      }
+    ],
+    "description": "<p>Get all users (as authenticated user with admin role)</p>",
+    "sampleRequest": [
+      {
+        "url": "/api/protected/users/all"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "getAll": [
+          {
+            "group": "getAll",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Page to dislay.</p>"
+          },
+          {
+            "group": "getAll",
+            "type": "Number",
+            "optional": false,
+            "field": "perPage",
+            "description": "<p>Number of posts to display per page</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/protected/users.js",
+    "groupTitle": "Users"
   }
 ] });

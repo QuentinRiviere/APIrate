@@ -9,6 +9,8 @@ let validateAdmin = (req, res, next) => {
         data: null
       });
     } else {
+      console.log(decoded)
+
       if(decoded.role === 'admin') {
         req.body.userId = decoded.id;
         next();

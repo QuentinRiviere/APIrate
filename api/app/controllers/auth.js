@@ -43,7 +43,8 @@ module.exports = {
 
           if (bcrypt.compareSync(req.body.password, userInfo.password)) {
             const token = jwt.sign({
-              id: userInfo._id
+              id: userInfo._id,
+              role: userInfo.role
             }, req.app.get('secretKey'), {
               expiresIn: CONFIG.jwt_expire ? CONFIG.jwt_expire : '1h'
             });
