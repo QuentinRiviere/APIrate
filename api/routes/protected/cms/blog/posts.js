@@ -29,9 +29,13 @@ router.post('/', postController.create);
  * @apiHeader {String} x-access-token Users unique x-access-token.
  * @apiPermission Authenticated User
  * @apiDescription Update a post by Id method (as authenticated users)
- * @apiParam (updateById) {String} [title] Post title.
- * @apiParam (updateById) {String} [subTitle] Post sub-title.
- * @apiParam (updateById) {String} [content] Post content.
+ * @apiSampleRequest /api/protected/posts/:postId
+ * @apiParam (create) {Object} title Post title <p>format : <code>{fr: "fr value", en: "en value"}</code>.<p> Or pass a <code>String</code> (saved as default language).<p>
+ * @apiParam (create) {Object} subTitle Post sub-title <p>format : <code>{fr: "fr value", en: "en value"}</code>.<p> Or pass a <code>String</code> (saved as default language).<p>
+ * @apiParam (create) {Object} content Post content <p>format : <code>{fr: "fr value", en: "en value"}</code>.<p> Or pass a <code>String</code> (saved as default language).<p>
+ * @apiParam (create) {Object} slug Post slug <p>format : <code>{fr: "fr value", en: "en value"}</code>.<p> Or pass a <code>String</code> (saved as default language).<p>
+ * @apiParam (create) {Array} [categories] Post categories Ids.
+ * @apiParam (create) {Array} [tags] Post tags Ids.
  *
  */
 router.put('/:postId', postController.updateById);
@@ -41,8 +45,10 @@ router.put('/:postId', postController.updateById);
  * @api {delete} /api/protected/posts/:postId DeleteById
  * @apiName DeleteById (Blog post)
  * @apiGroup Blog Posts
+ * @apiHeader {String} x-access-token Users unique x-access-token.
  * @apiPermission Authenticated User
  * @apiDescription Delete a post by Id method (as authenticated users)
+ * @apiSampleRequest /api/protected/posts/:postId
  *
  */
 router.delete('/:postId', postController.deleteById);

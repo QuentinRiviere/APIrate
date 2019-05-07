@@ -171,7 +171,7 @@ let DefineToLocaleDocument = () => {
             reject(fieldsParseError);
           });
         } else {
-          reject('collection and document fields are null');
+          resolv(null);
         }
       } catch (err) {
         reject(err);

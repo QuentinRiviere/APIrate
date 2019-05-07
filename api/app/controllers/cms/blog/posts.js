@@ -9,6 +9,7 @@ module.exports = {
       if (err) {
         next(err);
       } else {
+        console.log(post);
         toLocaleDocument({
           document: post,
           locale: locale,
@@ -28,7 +29,7 @@ module.exports = {
         }).then(result => {
           res.json({
             status: 'success',
-            message: 'post found!!!',
+            message: result !== null ? 'post found!!!' : 'post not found :(',
             data: {
               post: result
             }
@@ -95,13 +96,12 @@ module.exports = {
     });
   },
   updateById: function(req, res, next) {
-
-    postModel.findByIdAndUpdate(req.params.postId, {
+    postModel.findOneAndUpdate(req.params.postId, {
       title: req.body.title,
       subTitle: req.body.subTitle,
       content: req.body.content,
       categories: req.body.categories,
-      tags: req.body.tagsId,
+      tags: req.body.tags,
       updatedAt: Date.now(),
     }, function(err, postInfo) {
       if (err)
@@ -110,13 +110,13 @@ module.exports = {
         res.json({
           status: 'success',
           message: 'post updated successfully!!!',
-          data: null,
+          data: postInfo,
         });
       }
     });
   },
   deleteById: function(req, res, next) {
-    postModel.findByIdAndRemove(req.params.postId, function(err, postInfo) {
+    postModel.findOneAndDelete(req.body.postId, function(err, postInfo) {
       if (err)
         next(err);
       else {
@@ -129,26 +129,6 @@ module.exports = {
     });
   },
   create: function(req, res, next) {
-    //    toLocaleRequest({
-    //      model: "post",
-    //      request: req.body,
-    //      params: [
-    //       "title",
-    //       "subTitle",
-    //       "userId",
-    //       "content",
-    //       "categories",
-    //       "tags"
-    //      ]
-    //    }).then(result => {
-    //      res.json(result);
-    //      console.log(result);
-    //    }).catch(err => {
-    //      res.json(err);
-    //      console.log(err);
-    //    });
-
-
     postModel.create({
       title: req.body.title,
       subTitle: req.body.subTitle,

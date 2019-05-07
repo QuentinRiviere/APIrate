@@ -300,12 +300,30 @@
     "title": "DeleteById",
     "name": "DeleteById__Blog_post_",
     "group": "Blog_Posts",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-access-token",
+            "description": "<p>Users unique x-access-token.</p>"
+          }
+        ]
+      }
+    },
     "permission": [
       {
         "name": "Authenticated User"
       }
     ],
     "description": "<p>Delete a post by Id method (as authenticated users)</p>",
+    "sampleRequest": [
+      {
+        "url": "/api/protected/posts/:postId"
+      }
+    ],
     "version": "0.0.0",
     "filename": "routes/protected/cms/blog/posts.js",
     "groupTitle": "Blog_Posts"
@@ -387,29 +405,55 @@
       }
     ],
     "description": "<p>Update a post by Id method (as authenticated users)</p>",
+    "sampleRequest": [
+      {
+        "url": "/api/protected/posts/:postId"
+      }
+    ],
     "parameter": {
       "fields": {
-        "updateById": [
+        "create": [
           {
-            "group": "updateById",
-            "type": "String",
-            "optional": true,
+            "group": "create",
+            "type": "Object",
+            "optional": false,
             "field": "title",
-            "description": "<p>Post title.</p>"
+            "description": "<p>Post title <p>format : <code>{fr: &quot;fr value&quot;, en: &quot;en value&quot;}</code>.<p> Or pass a <code>String</code> (saved as default language).<p></p>"
           },
           {
-            "group": "updateById",
-            "type": "String",
-            "optional": true,
+            "group": "create",
+            "type": "Object",
+            "optional": false,
             "field": "subTitle",
-            "description": "<p>Post sub-title.</p>"
+            "description": "<p>Post sub-title <p>format : <code>{fr: &quot;fr value&quot;, en: &quot;en value&quot;}</code>.<p> Or pass a <code>String</code> (saved as default language).<p></p>"
           },
           {
-            "group": "updateById",
-            "type": "String",
-            "optional": true,
+            "group": "create",
+            "type": "Object",
+            "optional": false,
             "field": "content",
-            "description": "<p>Post content.</p>"
+            "description": "<p>Post content <p>format : <code>{fr: &quot;fr value&quot;, en: &quot;en value&quot;}</code>.<p> Or pass a <code>String</code> (saved as default language).<p></p>"
+          },
+          {
+            "group": "create",
+            "type": "Object",
+            "optional": false,
+            "field": "slug",
+            "description": "<p>Post slug <p>format : <code>{fr: &quot;fr value&quot;, en: &quot;en value&quot;}</code>.<p> Or pass a <code>String</code> (saved as default language).<p></p>"
+          },
+          {
+            "group": "create",
+            "type": "Array",
+            "optional": true,
+            "field": "categories",
+            "description": "<p>Post categories Ids.</p>"
+          },
+          {
+            "group": "create",
+            "type": "Array",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>Post tags Ids.</p>"
           }
         ]
       }
