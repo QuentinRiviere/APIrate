@@ -31,7 +31,7 @@
         {{/if}}
       {{else}}
         <li class="{{#if hidden}}hide {{/if}}" data-group="{{group}}" data-name="{{name}}" data-version="{{version}}">
-          <a href="#api-{{group}}-{{name}}" class="nav-list-item">{{title}} {{#if permission}} <small class=""><i class="fas fa-user-lock"></i></small>{{/if}}</a>
+          <a href="#api-{{group}}-{{name}}" class="nav-list-item">{{title}} {{#if permission}} <small class="text-danger"><i class="fas fa-user-lock"></i>{{permission name}}</small>{{/if}}</a>
         </li>
       {{/if}}
     {{/if}}
