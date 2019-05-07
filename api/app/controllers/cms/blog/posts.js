@@ -40,7 +40,6 @@ module.exports = {
     }).populate('categories').populate('tags');
   },
   getAll: function(req, res, next) {
-    console.log(req.body);
     let postsList = [];
     let locale = req.param('locale') && CONFIG.locales.includes(req.param('locale')) ? req.param('locale') : CONFIG.default_locale;
     let perPage = req.param('perPage') ? parseInt(req.param('perPage')) : parseInt(postModel.estimatedDocumentCount()),
@@ -152,7 +151,9 @@ module.exports = {
     //      res.json(err);
     //      console.log(err);
     //    });
-    let newPost = new postModel({
+
+
+    postModel.create({
       title: req.body.title,
       subTitle: req.body.subTitle,
       userId: req.body.userId,
@@ -162,40 +163,17 @@ module.exports = {
       tags: req.body.tags,
       createdAt: Date.now(),
       updatedAt: Date.now(),
-      deletedAt: null
-    });
+      deletedAt: null,
+    }, function(err, result) {
+      if (err)
+        next(err);
+      else
+        res.json({
+          status: 'success',
+          message: 'post added successfully!!!',
+          data: null,
+        });
 
-    newPost.save(function(err) {
-      if (err) return console.log(err);
-      console.log(`postadded successfully!!!`);
-      res.json({
-        status: 'success',
-        message: 'post added successfully!!!',
-        data: null,
-      });
     });
-
-    // postModel.create({
-    //   title: req.body.title,
-    //   subTitle: req.body.subTitle,
-    //   userId: req.body.userId,
-    //   content: req.body.content,
-    //   slug: req.body.slug,
-    //   categories: req.body.categories,
-    //   tags: req.body.tags,
-    //   createdAt: Date.now(),
-    //   updatedAt: Date.now(),
-    //   deletedAt: null,
-    // }, function(err, result) {
-    //   if (err)
-    //     next(err);
-    //   else
-    //     res.json({
-    //       status: 'success',
-    //       message: 'post added successfully!!!',
-    //       data: null,
-    //     });
-    //
-    // });
   },
 };
