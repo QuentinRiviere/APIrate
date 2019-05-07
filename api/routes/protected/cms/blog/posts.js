@@ -10,7 +10,7 @@ const postController = require(NAMESPACES.controller.BlogPosts);
  * @apiHeader {String} x-access-token Users unique x-access-token.
  * @apiPermission Authenticated User
  * @apiDescription Create post method (as authenticated users)
- *
+ * @apiSampleRequest /api/protected/posts
  * @apiParam (create) {Object} title Post title <p>format : <code>{fr: "fr value", en: "en value"}</code>.<p> Or pass a <code>String</code> (saved as default language).<p>
  * @apiParam (create) {Object} subTitle Post sub-title <p>format : <code>{fr: "fr value", en: "en value"}</code>.<p> Or pass a <code>String</code> (saved as default language).<p>
  * @apiParam (create) {Object} content Post content <p>format : <code>{fr: "fr value", en: "en value"}</code>.<p> Or pass a <code>String</code> (saved as default language).<p>

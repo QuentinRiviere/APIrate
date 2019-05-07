@@ -1,4 +1,3 @@
-require('dotenv').config();
 const DefineEnv = require('./_env'); // Languages definition
 DefineEnv();
 const DefineNamespaces = require('./_namespaces'); // Facades definition

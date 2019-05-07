@@ -1,6 +1,6 @@
-
+require('dotenv').config();
 let DefineEnv = () => {
-  
+
   /*
    *
    *  LANGUAGES DEFINITION
@@ -20,7 +20,7 @@ let DefineEnv = () => {
     locales: process.env.LOCALES ? process.env.LOCALES.split(',') : ['en'],
     default_locale: process.env.DEFAULT_LOCALE ? process.env.DEFAULT_LOCALE : 'en'
   };
-  
+
 };
 
 module.exports = DefineEnv;

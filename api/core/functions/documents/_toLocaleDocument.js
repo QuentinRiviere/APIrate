@@ -47,6 +47,12 @@ let DefineToLocaleDocument = () => {
             if (typeof doc[key] === 'object') {
               // si le champs est une collection de document
               if (doc[key] instanceof Array) {
+                if(doc[key].length === 0){
+                  if (populate.length - 1 === i) {
+                    // On renvoie le document parsé
+                    resolv(doc);
+                  }
+                }
                 // Pour chaque document
                 doc[key].forEach((subDoc, n) => {
                   // Si la clé (key) de population existe dans le mapping d'internationalisation des schemas
@@ -113,6 +119,11 @@ let DefineToLocaleDocument = () => {
                   }
                 }
 
+              }
+            }else{
+              if (populate.length - 1 === i) {
+                // On renvoie le document parsé
+                resolv(doc);
               }
             }
           });

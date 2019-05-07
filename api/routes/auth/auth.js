@@ -24,8 +24,9 @@ router.post('/register', authController.register);
  * @apiGroup Auth
  * @apiDescription Authenticate as user (with email and password)
  * and receive a json web token for protected routes requests
- * @apiParam (authenticate) {String} Email User email.
- * @apiParam (authenticate) {Number} Password User password.
+ * @apiSampleRequest /api/auth/authenticate
+ * @apiParam (authenticate) {String} email User email.
+ * @apiParam (authenticate) {String} password User password.
  */
 router.post('/authenticate', authController.authenticate);
 

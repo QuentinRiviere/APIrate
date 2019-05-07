@@ -1,1 +1,31 @@
-define({  "name": "APIrate",  "version": "0.1.0",  "description": "Template for Rest api creation",  "title": "Custom apiDoc browser title",  "url": "https://localhost",  "header": {    "title": "Documentation"  },  "footer": {    "title": "coded w/ ❤️"  },  "order": [    "GetAll",    "GetById",    "Create",    "UpdateById",    "DeleteById",    "Register",    "Authenticate"  ],  "sampleUrl": false,  "defaultVersion": "0.0.0",  "apidoc": "0.3.0",  "generator": {    "name": "apidoc",    "time": "2019-05-05T22:36:48.023Z",    "url": "http://apidocjs.com",    "version": "0.17.7"  }});
+define({
+  "name": "APIrate",
+  "version": "0.1.0",
+  "description": "Template for Rest api creation",
+  "title": "Custom apiDoc browser title",
+  "url": "https://localhost",
+  "header": {
+    "title": "Documentation"
+  },
+  "footer": {
+    "title": "coded w/ ❤️"
+  },
+  "order": [
+    "GetAll",
+    "GetById",
+    "Create",
+    "UpdateById",
+    "DeleteById",
+    "Register",
+    "Authenticate"
+  ],
+  "sampleUrl": false,
+  "defaultVersion": "0.0.0",
+  "apidoc": "0.3.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2019-05-07T08:35:41.076Z",
+    "url": "http://apidocjs.com",
+    "version": "0.17.7"
+  }
+});
