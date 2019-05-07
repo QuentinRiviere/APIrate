@@ -4,39 +4,39 @@ const categoryController = require(NAMESPACES.controller.BlogCategories);
 
 /**
  *
- * @api {post} /api/protected/categories Create (Blog categories)
+ * @api {post} /api/protected/categories/create Create (Blog categories)
  * @apiName Create (Blog categories)
  * @apiGroup Blog Categories
  * @apiHeader {String} x-access-token Users unique x-access-token.
  * @apiPermission Authenticated User
  * @apiDescription Create category method (as authenticated users)
- * @apiSampleRequest /api/protected/categories
+ * @apiSampleRequest /api/protected/categories/create
  * @apiParam (create) {Object} name Category name. <p>format : <code>{fr: "fr value", en: "en value"}</code>.<p> Or pass a <code>String</code> (saved as default language).<p>
  */
-router.post('/', categoryController.create);
+router.post('/create', categoryController.create);
 
 /**
  *
- * @api {put} /api/protected/categories/:categoryId UpdateById (Blog categories)
+ * @api {put} /api/protected/categories/update/:categoryId UpdateById (Blog categories)
  * @apiName UpdateById (Blog categories)
  * @apiGroup Blog Categories
  * @apiHeader {String} x-access-token Users unique x-access-token.
  * @apiPermission Authenticated User
  * @apiDescription Update a category by Id method (as authenticated users)
- * @apiSampleRequest /api/protected/categories/:categoryId
+ * @apiSampleRequest /api/protected/categories/update/:categoryId
  * @apiParam (UpdateById) {Object} name Category name. <p>format : <code>{fr: "fr value", en: "en value"}</code>.<p> Or pass a <code>String</code> (saved as default language).<p>
  *
  */
-router.put('/:categoryId', categoryController.updateById);
+router.put('/update/:categoryId', categoryController.updateById);
 
 /**
  *
- * @api {delete} /api/protected/categories/:categoryId DeleteById (Blog categories)
+ * @api {delete} /api/protected/categories/delete/:categoryId DeleteById (Blog categories)
  * @apiName DeleteById (Blog categories)
  * @apiGroup Blog Categories
  * @apiPermission Authenticated User
  * @apiDescription Delete a category by Id method (as authenticated users)
  *
  */
-router.delete('/:categoryId', categoryController.deleteById);
+router.delete('/delete/:categoryId', categoryController.deleteById);
 module.exports = router;

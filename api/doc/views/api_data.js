@@ -82,7 +82,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/api/protected/categories",
+    "url": "/api/protected/categories/create",
     "title": "Create (Blog categories)",
     "name": "Create__Blog_categories_",
     "group": "Blog_Categories",
@@ -107,7 +107,7 @@ define({ "api": [
     "description": "<p>Create category method (as authenticated users)</p>",
     "sampleRequest": [
       {
-        "url": "/api/protected/categories"
+        "url": "/api/protected/categories/create"
       }
     ],
     "parameter": {
@@ -129,7 +129,7 @@ define({ "api": [
   },
   {
     "type": "delete",
-    "url": "/api/protected/categories/:categoryId",
+    "url": "/api/protected/categories/delete/:categoryId",
     "title": "DeleteById (Blog categories)",
     "name": "DeleteById__Blog_categories_",
     "group": "Blog_Categories",
@@ -145,13 +145,13 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/categories",
+    "url": "/api/categories/all",
     "title": "GetAll (Blog categories)",
     "name": "GetAll__Blog_categories_",
     "group": "Blog_Categories",
     "sampleRequest": [
       {
-        "url": "/api/categories"
+        "url": "/api/categories/all"
       }
     ],
     "description": "<p>Get all categories method</p>",
@@ -161,13 +161,13 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/categories/:categoryId",
+    "url": "/api/categories/id/:categoryId",
     "title": "GetById (Blog categories)",
     "name": "GetById__Blog_categories_",
     "group": "Blog_Categories",
     "sampleRequest": [
       {
-        "url": "/api/categories/:categoryId"
+        "url": "/api/categories/id/:categoryId"
       }
     ],
     "description": "<p>Get a category by Id method</p>",
@@ -176,8 +176,37 @@ define({ "api": [
     "groupTitle": "Blog_Categories"
   },
   {
+    "type": "post",
+    "url": "/api/categories/name",
+    "title": "GetByName (Blog categories)",
+    "name": "GetByName__Blog_categories_",
+    "group": "Blog_Categories",
+    "description": "<p>Get a post by Id method</p>",
+    "sampleRequest": [
+      {
+        "url": "/api/categories/name"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "GetByName": [
+          {
+            "group": "GetByName",
+            "type": "Object",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Category name. <p>format : <code>{fr: &quot;fr value&quot;, en: &quot;en value&quot;}</code>.<p> Or pass a <code>String</code> (saved as default language).<p></p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/public/cms/blog/categories.js",
+    "groupTitle": "Blog_Categories"
+  },
+  {
     "type": "put",
-    "url": "/api/protected/categories/:categoryId",
+    "url": "/api/protected/categories/update/:categoryId",
     "title": "UpdateById (Blog categories)",
     "name": "UpdateById__Blog_categories_",
     "group": "Blog_Categories",
@@ -202,7 +231,7 @@ define({ "api": [
     "description": "<p>Update a category by Id method (as authenticated users)</p>",
     "sampleRequest": [
       {
-        "url": "/api/protected/categories"
+        "url": "/api/protected/categories/update/:categoryId"
       }
     ],
     "parameter": {
@@ -224,7 +253,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/api/protected/posts",
+    "url": "/api/protected/posts/create",
     "title": "Create (Blog post)",
     "name": "Create__Blog_post_",
     "group": "Blog_Posts",
@@ -249,7 +278,7 @@ define({ "api": [
     "description": "<p>Create post method (as authenticated users)</p>",
     "sampleRequest": [
       {
-        "url": "/api/protected/posts"
+        "url": "/api/protected/posts/create"
       }
     ],
     "parameter": {
@@ -306,7 +335,7 @@ define({ "api": [
   },
   {
     "type": "delete",
-    "url": "/api/protected/posts/:postId",
+    "url": "/api/protected/posts/delete/:postId",
     "title": "DeleteById",
     "name": "DeleteById__Blog_post_",
     "group": "Blog_Posts",
@@ -331,7 +360,7 @@ define({ "api": [
     "description": "<p>Delete a post by Id method (as authenticated users)</p>",
     "sampleRequest": [
       {
-        "url": "/api/protected/posts/:postId"
+        "url": "/api/protected/posts/delete/:postId"
       }
     ],
     "version": "0.0.0",
@@ -340,13 +369,13 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/posts",
+    "url": "/api/posts/all",
     "title": "GetAll (Blog post)",
     "name": "GetAll__Blog_post_",
     "group": "Blog_Posts",
     "sampleRequest": [
       {
-        "url": "/api/posts"
+        "url": "/api/posts/all"
       }
     ],
     "description": "<p>Get all posts method</p>",
@@ -376,13 +405,13 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/posts/:postId",
+    "url": "/api/posts/id/:postId",
     "title": "GetById (Blog post)",
     "name": "GetById__Blog_post_",
     "group": "Blog_Posts",
     "sampleRequest": [
       {
-        "url": "/api/posts/:postId"
+        "url": "/api/posts/getById/:postId"
       }
     ],
     "description": "<p>Get a post by Id method</p>",
@@ -392,7 +421,7 @@ define({ "api": [
   },
   {
     "type": "put",
-    "url": "/api/protected/posts/:postId",
+    "url": "/api/protected/posts/update/:postId",
     "title": "UpdateById (Blog post)",
     "name": "UpdateById__Blog_post_",
     "group": "Blog_Posts",
@@ -417,7 +446,7 @@ define({ "api": [
     "description": "<p>Update a post by Id method (as authenticated users)</p>",
     "sampleRequest": [
       {
-        "url": "/api/protected/posts/:postId"
+        "url": "/api/protected/posts/update/:postId"
       }
     ],
     "parameter": {

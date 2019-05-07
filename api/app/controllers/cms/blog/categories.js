@@ -88,5 +88,31 @@ module.exports = {
         });
 
     });
-  }
+  },
+  getByName: function(req, res, next) {
+    let locale = req.param('locale') && CONFIG.locales.includes(req.param('locale')) ? req.param('locale') : CONFIG.default_locale;
+    console.log(req.body);
+    let attribute = `name.${locale}`;
+    let query = {}
+    query[`name.${locale}`] = req.body.name
+    categoryModel.findOne(query, function(err, category) {
+      if (err) {
+        next(err);
+      } else {
+        if(category !== null){
+          category.setLanguage(locale);
+        }
+        res.json({
+          status: "success",
+          message: category !== null ?  "category found!!!" : "category not found :(",
+          data: {
+            category: category === null ? null : {
+              id: category._id,
+              name: category.name
+            }
+          }
+        });
+      }
+    });
+  },
 };
