@@ -42,19 +42,27 @@ module.exports = {
   getAll: function(req, res, next) {
     let postsList = [];
     let locale = req.param('locale') && CONFIG.locales.includes(req.param('locale')) ? req.param('locale') : CONFIG.default_locale;
-    let perPage = req.param('perPage') ? parseInt(req.param('perPage')) : parseInt(postModel.count()),
+    let perPage = req.param('perPage') ? parseInt(req.param('perPage')) : parseInt(postModel.estimatedDocumentCount()),
       page = Math.max(0, req.param('page'));
-    
-    postModel.find({})
-      .populate('categories')
-      .populate('tags')
-      .skip(perPage * page)
-      .limit(perPage)
-      .exec(function(err, posts) {
-        if (err) {
-          next(err);
-        } else {
-          postModel.countDocuments().exec(function(err, count) {
+
+    postModel.estimatedDocumentCount().exec(function(err, count) {
+
+
+      let paginate = safePaginate({
+        perPage: perPage,
+        page: page,
+        count: count
+      })
+
+      postModel.find({})
+        .populate('categories')
+        .populate('tags')
+        .skip((paginate.perPage * paginate.page))
+        .limit(paginate.perPage)
+        .exec(function(err, posts) {
+          if (err) {
+            next(err);
+          } else {
             // Global function toLocaleDocument (location : api/core/functions/documents.js)
             toLocaleDocument({
               collection: posts,
@@ -76,18 +84,18 @@ module.exports = {
             }).then(result => {
               res.json({
                 posts: result,
-                page: page,
-                pages: Math.floor(count / perPage),
+                page: paginate.page + 1,
+                pages: Math.floor(count / paginate.perPage),
               });
             }).catch(err => {
               next(err);
             });
-          });
-        }
-      });
+          }
+        });
+    });
   },
   updateById: function(req, res, next) {
-    
+
     postModel.findByIdAndUpdate(req.params.postId, {
       title: req.body.title,
       subTitle: req.body.subTitle,
@@ -123,25 +131,25 @@ module.exports = {
   create: function(req, res, next) {
     console.log(req.body.userId);
 
-//    toLocaleRequest({
-//      model: "post",
-//      request: req.body,
-//      params: [
-//       "title",
-//       "subTitle",
-//       "userId",
-//       "content",
-//       "categories",
-//       "tags"
-//      ]
-//    }).then(result => {
-//      res.json(result);
-//      console.log(result);
-//    }).catch(err => {
-//      res.json(err);
-//      console.log(err);
-//    });
-    
+    //    toLocaleRequest({
+    //      model: "post",
+    //      request: req.body,
+    //      params: [
+    //       "title",
+    //       "subTitle",
+    //       "userId",
+    //       "content",
+    //       "categories",
+    //       "tags"
+    //      ]
+    //    }).then(result => {
+    //      res.json(result);
+    //      console.log(result);
+    //    }).catch(err => {
+    //      res.json(err);
+    //      console.log(err);
+    //    });
+
     postModel.create({
       title: req.body.title,
       subTitle: req.body.subTitle,

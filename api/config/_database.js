@@ -1,6 +1,6 @@
 //Set up mongoose connection
 const mongoose = require('mongoose');
-const mongoDB = 'mongodb://app_user_example:app_pass_example@localhost/hrdb';
+const mongoDB = `mongodb://${CONFIG.app_mongo_user}:${CONFIG.app_mongo_password}@${CONFIG.server_ip}/${CONFIG.app_mongo_db}`;
 mongoose.connect(mongoDB, {
   useNewUrlParser: true
 });

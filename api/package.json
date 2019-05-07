@@ -47,6 +47,7 @@
     "passport-linkedin-oauth2": "^1.6.1"
   },
   "devDependencies": {
+    "bson": "^4.0.2",
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
     "sinon": "^7.3.2"

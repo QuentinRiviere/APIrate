@@ -28,4 +28,3 @@ mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection 
 mongoose.connection.on('open', function() {
   console.log('Connected to mongoose');
 });
-

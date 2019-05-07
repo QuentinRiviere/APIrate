@@ -1,5 +1,5 @@
 let DefineToLocaleDocument = () => {
-  
+
   /*
    *
    *  Translate document or collection deeply ( even populated documents )
@@ -11,7 +11,7 @@ let DefineToLocaleDocument = () => {
       locale = params.locale ? params.locale : CONFIG.default_locale,
       fields = params.fields ? params.fields : [],
       populate = params.populate ? params.populate : [];
-    
+
     function fieldsParse(document) {
       return new Promise((resolv, reject) => {
         try {
@@ -33,15 +33,15 @@ let DefineToLocaleDocument = () => {
         }
       });
     }
-    
+
     function intlParse(doc) {
       return new Promise((resolv, reject) => {
         try {
-          
+
           if (populate.length === 0) {
             resolv(doc);
           }
-          
+
           populate.forEach((key, i) => {
             // si le champs est un object
             if (typeof doc[key] === 'object') {
@@ -71,7 +71,7 @@ let DefineToLocaleDocument = () => {
                           }
                         }
                       }
-                      
+
                     });
                   }
                   // Si tous les sous documents ont été parcouru
@@ -103,7 +103,7 @@ let DefineToLocaleDocument = () => {
                         resolv(doc);
                       }
                     }
-                    
+
                   });
                 } else {
                   // Si le tableau des Schema à peupler a été parcouru
@@ -112,7 +112,7 @@ let DefineToLocaleDocument = () => {
                     resolv(doc);
                   }
                 }
-                
+
               }
             }
           });
@@ -120,9 +120,9 @@ let DefineToLocaleDocument = () => {
           reject(err);
         }
       });
-      
+
     }
-    
+
     return new Promise((resolv, reject) => {
       try {
         if (collection !== null) {
@@ -165,7 +165,7 @@ let DefineToLocaleDocument = () => {
       } catch (err) {
         reject(err);
       }
-      
+
     });
   };
 };
