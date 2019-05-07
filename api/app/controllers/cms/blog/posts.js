@@ -129,10 +129,6 @@ module.exports = {
     });
   },
   create: function(req, res, next) {
-    console.log(req.body.userId);
-    console.log(req.headers);
-
-    console.log(JSON.stringify(req.body, null, 2));
     //    toLocaleRequest({
     //      model: "post",
     //      request: req.body,
