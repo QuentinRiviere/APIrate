@@ -76,7 +76,7 @@ module.exports = {
   create: function(req, res, next) {
     console.log(req.body.userId);
     tagModel.create({
-      name: req.body.tags,
+      name: req.body.name,
     }, function(err, result) {
       if (err)
         next(err);

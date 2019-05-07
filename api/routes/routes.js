@@ -19,7 +19,10 @@ const protectedUsers = require(NAMESPACES.routes.ProtectedUsers);
 const posts = require(NAMESPACES.routes.BlogPosts);
 const protectedPosts = require(NAMESPACES.routes.ProtectedBlogPosts);
 const categories = require(NAMESPACES.routes.BlogCategories);
+const protectedCategories = require(NAMESPACES.routes.ProtectedBlogCategories);
 const tags = require(NAMESPACES.routes.BlogTags);
+const protectedTags = require(NAMESPACES.routes.ProtectedBlogTags);
+
 
 app.set('secretKey', CONFIG.jwt_secret_key ? CONFIG.jwt_secret_key : Math.random().toString(36).substring(20)); // jwt secret token
 
@@ -119,6 +122,9 @@ app.use(api + '/auth', linkedin);
 app.use(apiPriv, validateUser);
 app.use(apiPriv + '/users', validateUser, protectedUsers);
 app.use(apiPriv + '/posts', validateUser, protectedPosts);
+app.use(apiPriv + '/categories', validateUser, protectedCategories);
+app.use(apiPriv + '/tags', validateUser, protectedTags);
+
 
 /*
  *

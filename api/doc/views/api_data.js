@@ -105,15 +105,20 @@ define({ "api": [
       }
     ],
     "description": "<p>Create category method (as authenticated users)</p>",
+    "sampleRequest": [
+      {
+        "url": "/api/protected/categories"
+      }
+    ],
     "parameter": {
       "fields": {
         "create": [
           {
             "group": "create",
-            "type": "String",
-            "optional": true,
+            "type": "Object",
+            "optional": false,
             "field": "name",
-            "description": "<p>Category name.</p>"
+            "description": "<p>Category name. <p>format : <code>{fr: &quot;fr value&quot;, en: &quot;en value&quot;}</code>.<p> Or pass a <code>String</code> (saved as default language).<p></p>"
           }
         ]
       }
@@ -195,15 +200,20 @@ define({ "api": [
       }
     ],
     "description": "<p>Update a category by Id method (as authenticated users)</p>",
+    "sampleRequest": [
+      {
+        "url": "/api/protected/categories"
+      }
+    ],
     "parameter": {
       "fields": {
-        "updateById": [
+        "UpdateById": [
           {
-            "group": "updateById",
-            "type": "String",
-            "optional": true,
+            "group": "UpdateById",
+            "type": "Object",
+            "optional": false,
             "field": "name",
-            "description": "<p>Category name.</p>"
+            "description": "<p>Category name. <p>format : <code>{fr: &quot;fr value&quot;, en: &quot;en value&quot;}</code>.<p> Or pass a <code>String</code> (saved as default language).<p></p>"
           }
         ]
       }
@@ -495,7 +505,7 @@ define({ "api": [
             "type": "String",
             "optional": true,
             "field": "name",
-            "description": "<p>Category name.</p>"
+            "description": "<p>name Catname.</p>"
           }
         ]
       }

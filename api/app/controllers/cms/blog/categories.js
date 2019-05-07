@@ -47,7 +47,7 @@ module.exports = {
   },
   updateById: function(req, res, next) {
     categoryModel.findByIdAndUpdate(req.params.categoryId, {
-      name: req.body.categories
+      name: req.body.name
     }, function(err, categoryInfo) {
       if (err)
         next(err);
@@ -55,7 +55,7 @@ module.exports = {
         res.json({
           status: "success",
           message: "category updated successfully!!!",
-          data: null
+          data: categoryInfo
         });
       }
     });
@@ -68,7 +68,7 @@ module.exports = {
         res.json({
           status: "success",
           message: "category deleted successfully!!!",
-          data: null
+          data: categoryInfo
         });
       }
     });
@@ -76,7 +76,7 @@ module.exports = {
   create: function(req, res, next) {
     console.log(req.body.userId);
     categoryModel.create({
-      name: req.body.categories,
+      name: req.body.name,
     }, function(err, result) {
       if (err)
         next(err);
@@ -84,7 +84,7 @@ module.exports = {
         res.json({
           status: "success",
           message: "category added successfully!!!",
-          data: null
+          data: result
         });
 
     });

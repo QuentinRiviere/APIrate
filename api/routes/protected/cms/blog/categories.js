@@ -10,8 +10,8 @@ const categoryController = require(NAMESPACES.controller.BlogCategories);
  * @apiHeader {String} x-access-token Users unique x-access-token.
  * @apiPermission Authenticated User
  * @apiDescription Create category method (as authenticated users)
- * @apiParam (create) {String} [name] Category name.
- *
+ * @apiSampleRequest /api/protected/categories
+ * @apiParam (create) {Object} name Category name. <p>format : <code>{fr: "fr value", en: "en value"}</code>.<p> Or pass a <code>String</code> (saved as default language).<p>
  */
 router.post('/', categoryController.create);
 
@@ -23,10 +23,11 @@ router.post('/', categoryController.create);
  * @apiHeader {String} x-access-token Users unique x-access-token.
  * @apiPermission Authenticated User
  * @apiDescription Update a category by Id method (as authenticated users)
- * @apiParam (updateById) {String} [name] Category name.
+ * @apiSampleRequest /api/protected/categories/:categoryId
+ * @apiParam (UpdateById) {Object} name Category name. <p>format : <code>{fr: "fr value", en: "en value"}</code>.<p> Or pass a <code>String</code> (saved as default language).<p>
  *
  */
-router.put('/:tagId', categoryController.updateById);
+router.put('/:categoryId', categoryController.updateById);
 
 /**
  *

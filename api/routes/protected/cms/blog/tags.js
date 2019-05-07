@@ -11,7 +11,7 @@ const tagController = require(NAMESPACES.controller.BlogTags);
  * @apiHeader {String} x-access-token Users unique x-access-token.
  * @apiPermission Authenticated User
  * @apiDescription Create tag method (as authenticated users)
- * @apiParam (create) {String} [name] Category name.
+ * @apiParam (create) {String} [name] name Catname.
  *
  */
 router.post('/', tagController.create);
